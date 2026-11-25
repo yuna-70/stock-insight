@@ -21,6 +21,10 @@ from dotenv import load_dotenv
 load_dotenv()                        # .env 내용을 환경변수로 등록
 API_KEY = os.getenv("DART_API_KEY")  # 등록된 환경변수에서 키 꺼내기
 
+# 키가 없으면 나중에 이상한 응답으로 헤매지 않도록 바로 멈춘다
+if not API_KEY:
+    raise SystemExit(".env에 DART_API_KEY가 없습니다.")
+
 
 # ── 2. DART에 전체 회사 목록 요청 ───────────────────
 # 응답은 텍스트가 아니라 ZIP 파일(bytes)로 온다
