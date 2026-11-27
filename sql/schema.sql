@@ -44,7 +44,8 @@ CREATE TABLE disclosure_numbers (
     scope VARCHAR(50),                                                  -- 당해실적 / 누계실적
     period VARCHAR(50),                                                 -- 당기 / 전기 / 전년동기
     value NUMERIC,                                                      -- 쉼표 뺀 숫자, 소수(13.85)도 담음. 원문 '-'는 NULL (0과 뜻이 다름)
-    unit VARCHAR(50)                                                    -- 억원, % (단위 없으면 숫자 의미를 모름)
+    unit VARCHAR(50),
+    UNIQUE (rcept_no, item, scope, period)                                                  -- 억원, % (단위 없으면 숫자 의미를 모름)
 );
 
 
