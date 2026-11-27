@@ -37,7 +37,7 @@ def classify(report_nm: str) -> str:
         return "실적"
     elif "장래사업" in report_nm:
         return "회사계획"
-    elif "배당" in report_nm or "자기주식" in report_nm:
+    elif "배당결정" in report_nm or "자기주식취득결정" in report_nm or "자기주식소각결정" in report_nm:
         return "주주환원"
     else:
         return "기타"
@@ -93,7 +93,9 @@ def save_disclosures(database_url: str, rows: list[tuple]) -> int:
     sql = (
         "INSERT INTO disclosures (rcept_no, corp_code, report_nm, rcept_dt, type) "
         "VALUES (%s, %s, %s, %s, %s) "
-        "ON CONFLICT (rcept_no) DO NOTHING;"  # 공시는 고쳐지지 않고 정정 공시가 새로 올라옴 → 있으면 건너뜀
+        # 공시 내용은 고쳐지지 않으니 그대로 두고(정정은 새 공시로 올라옴),
+        # type은 우리가 붙인 분류라 규칙이 바뀌면 최신 규칙으로 다시 붙인다
+        "ON CONFLICT (rcept_no) DO UPDATE SET type = EXCLUDED.type;"
     )
 
     with psycopg.connect(database_url) as conn:
