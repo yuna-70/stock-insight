@@ -1,0 +1,9 @@
+requests==2.34.2
+python-dotenv==1.2.4
+beautifulsoup4==4.15.0
+fastapi==0.165.0
+uvicorn==0.54.0
+psycopg[binary]==3.3.9
+pydantic-ai==2.76.0
+pytest==9.2.0
+httpx==0.29.0
