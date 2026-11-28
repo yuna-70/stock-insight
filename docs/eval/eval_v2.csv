@@ -1,0 +1,13 @@
+﻿rcept_no,trap,run,error,verified,unknown,numbers_exist,direction_correct,evidence_covers,length_ok,no_advice,has_key_number,clean_numbers,short_summary
+20261008800004,억원 기본,1,,True,,True,True,True,True,True,True,True,"매출 1,950,000억원·영업이익 1,074,000억원, 모두 증가"
+20261008800004,억원 기본,2,,True,,True,True,True,True,True,True,True,"매출 1,950,000억원·영업이익 1,074,000억원, 전년동기 대비 증가"
+20261008800004,억원 기본,3,,True,,True,True,True,True,True,True,True,"매출 1,950,000억원·영업이익 1,074,000억원, 전년 대비 증가"
+20261029800099,조원 정정,1,,True,,True,True,True,True,True,True,True,"매출 1,952,500억원·영업이익 1,074,400억원, 전년 대비 증가"
+20261029800099,조원 정정,2,,True,,True,True,True,True,True,True,True,"매출 1,952,500억원·영업이익 1,074,400억원, 전년동기 대비 증가"
+20261029800099,조원 정정,3,,True,,True,True,True,True,True,True,True,"매출 1,952,500억원·영업이익 1,074,400억원, 전년동기 대비 증가"
+20261028800036,백만원·음수 증감률,1,,True,,True,True,True,True,True,True,True,"매출 1,046,154.83억원·영업이익 833,338.18억원"
+20261028800036,백만원·음수 증감률,2,,True,,True,True,True,True,True,True,True,"매출 1,046,154.83억원·영업이익 833,338.18억원, 전년 대비 급증"
+20261028800036,백만원·음수 증감률,3,,True,,True,True,True,True,True,True,True,"매출 1,046,154.83억원·영업이익 833,338.18억원, 전기 대비 증가"
+20261029800087,억원 (같은 날 정정과 함께 나온 공시),1,,True,,True,True,True,True,True,True,True,"매출 1,952,532억원·영업이익 1,074,405억원"
+20261029800087,억원 (같은 날 정정과 함께 나온 공시),2,,True,,True,True,True,True,True,True,True,"매출 1,952,532억원·영업이익 1,074,405억원"
+20261029800087,억원 (같은 날 정정과 함께 나온 공시),3,,True,,True,True,True,True,True,True,True,"매출 1,952,532억원·영업이익 1,074,405억원, 전기 대비 증가"
