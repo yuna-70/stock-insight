@@ -26,7 +26,7 @@ if not LLM_MODEL:
 
 # 프롬프트(SYSTEM_PROMPT, 입력 모양)를 고치면 버전을 올린다
 # → summaries.prompt_version에 저장해서 버전별로 요약을 비교·채점
-PROMPT_VERSION = "v1"
+PROMPT_VERSION = "v2"
 
 # 글자에서 숫자 뽑기: 1,952,532 / 13.85 / -58.7 / 2026
 # (마이너스 증감율도 같은 숫자로 보이도록 앞의 '-'까지 포함)
@@ -76,10 +76,18 @@ class DisclosureSummary(BaseModel):
 def fmt(value, unit: str) -> str:
     """숫자 하나를 원문처럼 쓴다. None → '없음', 1952532 → '1,952,532억원'
 
-    원문과 같은 모양(쉼표)이라 LLM이 그대로 옮겨 적기 쉽고, 검증할 때도 같은 모양으로 비교된다.
+    소수점 아래가 0이면 정수로 (1952500.00 → 1952500)
+    → 조원·백만원을 억원으로 바꾸면서 생긴 .00 군더더기를 LLM 입력에서 없앰
     """
+    # None이면 "없음" (int(None)은 에러라서 숫자 처리보다 먼저)
     if value is None:
         return "없음"
+
+    # 소수점 아래가 0이면 정수로 (13.85, 1046154.83처럼 진짜 소수는 그대로)
+    if value == int(value):
+        value = int(value)
+
+    # 쉼표 + 단위
     return f"{value:,}{unit}"
 
 
@@ -123,8 +131,9 @@ async def summarize(message: str) -> DisclosureSummary:
 
 # ── 검증 ──────────────────────────────────────────────
 def extract_numbers(text: str) -> set[str]:
+    # ★ 뽑은 숫자마다 앞의 "-"를 떼서 집합으로
     """글자 속 숫자를 전부 뽑아 집합으로. '1,952,532억원, 13.85%' → {'1,952,532', '13.85'}"""
-    return set(NUMBER_PATTERN.findall(text))
+    return {n.lstrip("-") for n in NUMBER_PATTERN.findall(text)}
 
 
 def find_unknown_numbers(output: DisclosureSummary, message: str) -> list[str]:
