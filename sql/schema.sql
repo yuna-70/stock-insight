@@ -60,5 +60,6 @@ CREATE TABLE summaries (
     evidence JSONB,                                                     -- 근거 문장 목록. JSONB라 검색이 빠름
     model VARCHAR NOT NULL,                                             -- 요약한 LLM 모델 이름
     prompt_version VARCHAR NOT NULL,                                    -- 프롬프트 버전 (v1, v2 비교·채점용)
-    created_at TIMESTAMP DEFAULT NOW()                                  -- 만든 시각. 저장할 때 자동으로 채워짐
+    created_at TIMESTAMP DEFAULT NOW(),                                 -- 만든 시각. 저장할 때 자동으로 채워짐
+    UNIQUE (rcept_no, model, prompt_version)                            -- 같은 공시·모델·프롬프트 버전이면 한 줄만 (재실행 시 덮어씀)
 );
